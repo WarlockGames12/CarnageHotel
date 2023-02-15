@@ -61,14 +61,19 @@
      <Compile Include="Assets\Scripts\UI\DialogueManager.cs" />
      <Compile Include="Assets\Scripts\Enemy\WanderingState.cs" />
      <Compile Include="Assets\Scripts\Player\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\Enemy\NavMesh\NavMeshLink.cs" />
      <Compile Include="Assets\Scripts\UI\BeginSequence.cs" />
+     <Compile Include="Assets\Scripts\Enemy\NavMesh\NavMeshModifierVolume.cs" />
+     <Compile Include="Assets\Scripts\Enemy\NavMesh\NavMeshModifier.cs" />
      <Compile Include="Assets\Scripts\Enemy\EnemyAI.cs" />
      <Compile Include="Assets\GoToNextSceneDoor.cs" />
      <Compile Include="Assets\Scripts\Enemy\StateMachine.cs" />
      <Compile Include="Assets\Flickering.cs" />
+     <Compile Include="Assets\Scripts\Enemy\NavMesh\NavMeshSurface.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\PlayerBopper.cs" />
      <Compile Include="Assets\PlayerIsClose.cs" />
+     <Compile Include="Assets\Scripts\Enemy\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\Enemy\State.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.20f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -647,46 +652,46 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.20f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.AddOns.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ProBuilder.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/HotelOfDeath/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/fpwee/OneDrive/Documenten/Awesome/Carnage/CarnageHotel/HotelOfDeath/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
