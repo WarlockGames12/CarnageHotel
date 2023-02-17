@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] [Range(0, 500)] private float mouseSensitivity;
     [SerializeField] private Transform playerBody;
     private float _xRotation;
+    private PlayerMovement isJumpscare;
 
     private float _mouseX;
     private float _mouseY;
@@ -19,18 +20,22 @@ public class CameraMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        isJumpscare = GetComponentInParent<PlayerMovement>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        _mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        _mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        if (!isJumpscare.jumpScare)
+        {
+            _mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+            _mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        _xRotation -= _mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -90, 90);
+            _xRotation -= _mouseY;
+            _xRotation = Mathf.Clamp(_xRotation, -90, 90);
         
-        transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * _mouseX);
+            transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            playerBody.Rotate(Vector3.up * _mouseX);
+        }
     }
 }

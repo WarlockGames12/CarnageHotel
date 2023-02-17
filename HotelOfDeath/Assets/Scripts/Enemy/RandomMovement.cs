@@ -1,35 +1,47 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms;
+using Random = UnityEngine.Random;
 
 public class RandomMovement : MonoBehaviour
 {
- [Header("Navmesh Settings: ")] 
+
+   [Header("Navmesh Settings: ")] 
     [SerializeField] private NavMeshAgent enemyAgent;
     [SerializeField] private float enemyRange;
     [SerializeField] private float enemyChaseRange;
     [SerializeField] private float enemyChaseSpeed;
+    [SerializeField] private float waitTime;
     [SerializeField] private Transform centrePoint;
 
     [Header("Enemy Animations: ")]
     [SerializeField] private Animator enemyAnimator;
 
+    [Header("Enemy Walking Sound: ")]
+    [SerializeField] private AudioSource enemySteps;
+    [SerializeField] private AudioClip[] stepSounds;
+    
     private bool isChasing;
-    private Transform _playerWhenSeen;
-    private bool waitNow;
-    private RaycastHit _lookForWalls;
+    private bool isLookingAround;
+    private bool isWaiting;
+    private Transform playerTransform;
+    private RaycastHit lookForWalls;
     private Vector3 waitPoint;
+    private float timeSinceLastSighting;
 
     // Start is called before the first frame update
     private void Start()
     {
         enemyAgent = GetComponent<NavMeshAgent>();
-        _playerWhenSeen = GameObject.FindWithTag("Player").transform;
+        playerTransform = GameObject.FindWithTag("Player").transform;
+
         enemyAnimator.SetBool("Walk", true);
         enemyAnimator.SetBool("Run", false);
         enemyAnimator.SetBool("LookAround", false);
-        enemyAnimator.SetBool("Twerk", false);
-
+        
+        
         if (RandomPoint(centrePoint.position, enemyRange, out var randomPoint))
         {
             enemyAgent.Warp(randomPoint);
@@ -39,49 +51,102 @@ public class RandomMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // Check if player is within chase range
-        if (Vector3.Distance(_playerWhenSeen.position, transform.position) < enemyChaseRange! && Physics.Linecast(transform.position, _playerWhenSeen.position, out _lookForWalls))
+        EnemyMoves();
+        PlaySounds();
+    }
+
+    private void PlaySounds()
+    {
+        CancelInvoke();
+        if (Vector3.Distance(playerTransform.position, transform.position) < enemyChaseRange &&
+            Physics.Linecast(transform.position, playerTransform.position, out lookForWalls) &&
+            lookForWalls.transform.CompareTag("Player") && !enemySteps.isPlaying)
+        {
+            StartCoroutine(WalkSounds(0.8f));
+        } 
+        else if (enemyAgent.velocity.magnitude > 0.1f && !enemySteps.isPlaying)
+        {
+            StartCoroutine(WalkSounds(0.6f));
+        }
+    }
+    
+    private IEnumerator WalkSounds(float delay)
+    {
+        //Play random step sound
+        enemySteps.clip = stepSounds[Random.Range(0, stepSounds.Length)];
+        enemySteps.pitch = Random.Range(0.8f, 1.2f);
+        enemySteps.Play();
+        yield return new WaitForSeconds(delay);
+    }
+
+    private void EnemyMoves()
+    {
+        // Check if player is within chase range and is visible
+        if (Vector3.Distance(playerTransform.position, transform.position) < enemyChaseRange && Physics.Linecast(transform.position, playerTransform.position, out lookForWalls) && lookForWalls.transform.CompareTag("Player"))
         {
             isChasing = true;
+            timeSinceLastSighting = 0f;
             enemyAgent.speed = enemyChaseSpeed;
             enemyAnimator.SetBool("Walk", false);
             enemyAnimator.SetBool("Run", true);
-            enemyAgent.SetDestination(_playerWhenSeen.position);
+            enemyAnimator.SetBool("LookAround", false);
+            enemyAgent.SetDestination(playerTransform.position);
         }
         else
         {
+            timeSinceLastSighting += Time.deltaTime;
+
             // Check if enemy is done moving
-            if (enemyAgent.remainingDistance <= enemyAgent.stoppingDistance && !enemyAgent.pathPending)
+            if (enemyAgent.remainingDistance <= enemyAgent.stoppingDistance && !enemyAgent.pathPending && !isWaiting)
             {
-                enemyAnimator.SetBool("Walk", true);
-                enemyAnimator.SetBool("Run", false);
-                // Only move if not already chasing
-                if (!isChasing && !waitNow)
+                if (isChasing)
                 {
+                    enemyAnimator.SetBool("Walk", true);
+                    enemyAnimator.SetBool("Run", false);
+                    enemyAnimator.SetBool("LookAround", false);
+                    isChasing = false;
+
                     if (RandomPoint(centrePoint.position, enemyRange, out waitPoint))
                     {
-                        Debug.DrawRay(waitPoint, Vector3.up, Color.blue, 1.0f);
-                        enemyAnimator.SetBool("Walk", true);
-                        enemyAnimator.SetBool("Run", false);
                         enemyAgent.SetDestination(waitPoint);
-                        enemyAgent.speed = 3.5f;
-                        waitNow = true;
+                        isWaiting = true;
                     }
                 }
-            }
-            else
-            {
-                if (Vector3.Distance(transform.position, waitPoint) < 0.1f)
+                else if (!isLookingAround && !isWaiting)
                 {
                     enemyAnimator.SetBool("Walk", false);
+                    enemyAnimator.SetBool("Run", false);
                     enemyAnimator.SetBool("LookAround", true);
-                    waitNow = false;
+                    isLookingAround = true;
                 }
+            }
+            else if (!isChasing)
+            {
+                isLookingAround = false;
+                enemyAnimator.SetBool("LookAround", false);
+            }
+
+            if (isWaiting && Vector3.Distance(transform.position, waitPoint) < 0.1f)
+            {
+                isWaiting = false;
+            }
+
+            if (timeSinceLastSighting > waitTime)
+            {
+                enemyAnimator.SetBool("LookAround", false);
+                isLookingAround = false;
                 isChasing = false;
+
+                if (RandomPoint(centrePoint.position, enemyRange, out waitPoint))
+                {
+                    enemyAnimator.SetBool("Walk", true);
+                    enemyAgent.SetDestination(waitPoint);
+                    timeSinceLastSighting = 0f;
+                }
             }
         }
     }
-
+    
     private bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
         var randomPoint = center + Random.insideUnitSphere * range;

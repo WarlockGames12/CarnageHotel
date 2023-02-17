@@ -1,4 +1,8 @@
+using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
@@ -18,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Step Sound Settings: ")] 
     [SerializeField] private AudioSource stepSound;
     [SerializeField] private AudioClip[] stepSounds;
+    [SerializeField] private AudioSource jumpScareSound;
 
     [Header("Press E: ")]
     [SerializeField] private GameObject pressE;
@@ -31,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
     /*[Header("Dialogue is Coming: ")] 
     [SerializeField] private GameObject textDialogue;
     [SerializeField] private DialogueManager dialogue;*/
+
+    [SerializeField] private GameObject pauseMenu;
+    private bool isPaused = false;
     
     [Header("Flashlight Settings: ")] 
     [SerializeField] private AudioSource flashLightSound;
@@ -46,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private float _stepDelay = 0.5f;
     private float _nextStepTime;
     private Vector3 _playerVelocity;
+    
+    public bool jumpScare = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -54,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
         _animateCurve.AddKey(0, 0f);
         _animateCurve.AddKey(0.15f, 0.3f);
         _animateCurve.AddKey(0.3f, 0f);
+        
+        pauseMenu.SetActive(false);
         
         playOnly.enabled = false;
         _playerController = GetComponent<CharacterController>();
@@ -69,6 +81,12 @@ public class PlayerMovement : MonoBehaviour
             ToggleLight();
         }
 
+        SprintFeature();
+        PauseGame();
+    }
+
+    private void SprintFeature()
+    {
         if (Input.GetKeyDown(KeyCode.LeftShift) && _timeLeft <= 0)
         {
             playerSpeed = minSpeed;
@@ -89,6 +107,24 @@ public class PlayerMovement : MonoBehaviour
             _timeLeft -= Time.deltaTime;
         }
     }
+
+    private void PauseGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
+        {
+            pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0f;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        {
+            pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            Time.timeScale = 1f;
+        }
+    }
     
     private void ToggleLight()
     {
@@ -99,37 +135,40 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        _moveX = Input.GetAxis("Horizontal");
-        _moveY = Input.GetAxis("Vertical");
+        if (!jumpScare)
+        {
+            _moveX = Input.GetAxis("Horizontal");
+            _moveY = Input.GetAxis("Vertical");
 
-        var thisTransform = transform;
-        var playerMoves = thisTransform.right * _moveX + thisTransform.forward * _moveY;
-        playerSpeed = playerMoves.magnitude;
+            var thisTransform = transform;
+            var playerMoves = thisTransform.right * _moveX + thisTransform.forward * _moveY;
+            playerSpeed = playerMoves.magnitude;
         
-        playerSpeed = Mathf.Clamp(playerSpeed, minSpeed, maxSpeed);
+            playerSpeed = Mathf.Clamp(playerSpeed, minSpeed, maxSpeed);
         
-        if (_moveX != 0 || _moveY != 0)
-        {
-            PlayStepSound();
-            playOnly.enabled = true;
-            var bop = _animateCurve.Evaluate(Time.time) * playerSpeed;
+            if (_moveX != 0 || _moveY != 0)
+            {
+                PlayStepSound();
+                playOnly.enabled = true;
+                var bop = _animateCurve.Evaluate(Time.time) * playerSpeed;
             
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                playerSpeed = maxSpeed;
-            else if (Input.GetKeyUp(KeyCode.LeftShift))
-                playerSpeed = minSpeed;
+                if (Input.GetKeyDown(KeyCode.LeftShift))
+                    playerSpeed = maxSpeed;
+                else if (Input.GetKeyUp(KeyCode.LeftShift))
+                    playerSpeed = minSpeed;
             
-            Debug.Log(playerSpeed);
-            _playerController.Move(playerMoves * playerSpeed * Time.deltaTime + new Vector3(0,bop,0));
-        }
-        else
-        {
-            playOnly.enabled = false;
-            _playerController.Move(playerMoves * playerSpeed * Time.deltaTime + new Vector3(0,0,0));
-        }
+                Debug.Log(playerSpeed);
+                _playerController.Move(playerMoves * playerSpeed * Time.deltaTime + new Vector3(0,bop,0));
+            }
+            else
+            {
+                playOnly.enabled = false;
+                _playerController.Move(playerMoves * playerSpeed * Time.deltaTime + new Vector3(0,0,0));
+            }
         
-        _playerVelocity.y += playerGravity * Time.deltaTime;
-        _playerController.Move(_playerVelocity * Time.deltaTime);
+            _playerVelocity.y += playerGravity * Time.deltaTime;
+            _playerController.Move(_playerVelocity * Time.deltaTime);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -139,6 +178,11 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Door") && !isBeginning)
         {
             pressE.SetActive(true);
+        }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            jumpScare = true;
+            jumpScareSound.Play();
         }
     }
 

@@ -6,7 +6,7 @@ public class ButtonScript : MonoBehaviour
 
     public void GoToScene(string buttonString)
     {
-        Debug.Log("Is This button Working?"); 
+        Time.timeScale = 1f;
         SceneManager.LoadScene(buttonString);
     }
 
