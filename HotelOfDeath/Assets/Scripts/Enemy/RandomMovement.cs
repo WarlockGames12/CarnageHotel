@@ -46,13 +46,13 @@ public class RandomMovement : MonoBehaviour
         {
             enemyAgent.Warp(randomPoint);
         }
+        PlaySounds();
     }
 
     // Update is called once per frame
     private void Update()
     {
         EnemyMoves();
-        PlaySounds();
     }
 
     private void PlaySounds()
@@ -62,21 +62,25 @@ public class RandomMovement : MonoBehaviour
             Physics.Linecast(transform.position, playerTransform.position, out lookForWalls) &&
             lookForWalls.transform.CompareTag("Player") && !enemySteps.isPlaying)
         {
-            StartCoroutine(WalkSounds(0.8f));
+            WalkSounds(0.4f);
         } 
         else if (enemyAgent.velocity.magnitude > 0.1f && !enemySteps.isPlaying)
         {
-            StartCoroutine(WalkSounds(0.6f));
+            WalkSounds(0.8f);
+        }
+        else
+        {
+            InvokeRepeating("PlaySounds", 0,0.1f);
         }
     }
     
-    private IEnumerator WalkSounds(float delay)
+    private void WalkSounds(float delay)
     {
         //Play random step sound
         enemySteps.clip = stepSounds[Random.Range(0, stepSounds.Length)];
         enemySteps.pitch = Random.Range(0.8f, 1.2f);
         enemySteps.Play();
-        yield return new WaitForSeconds(delay);
+        Invoke("PlaySounds", delay);
     }
 
     private void EnemyMoves()
