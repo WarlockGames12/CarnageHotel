@@ -8,10 +8,14 @@ public class JumpScare : MonoBehaviour
     [Header("JumpScare Incoming: ")]
     [SerializeField] private GameObject[] forCams;
     [SerializeField] private GameObject enemyIsGone;
-    [SerializeField] private Animator jumpAni;
     [SerializeField] private GameObject gameOver;
+    [SerializeField] private Animator jumpAni;
+    [SerializeField] private Animator gameOverButtonsAni;
+    [SerializeField] private AudioSource gameOverClip;
 
     private PlayerMovement _getJumpScareGo;
+    private bool _hasPlayedGameOver = false;
+    private bool _getButtons = false;
 
     private void Start()
     {
@@ -34,6 +38,25 @@ public class JumpScare : MonoBehaviour
                 t.SetActive(true);
             }
             enemyIsGone.SetActive(false);
+            if (jumpAni.GetCurrentAnimatorStateInfo(0).IsName("JumpPunch") && !_hasPlayedGameOver)
+            {
+                _hasPlayedGameOver = true;
+                Invoke("ShowGameOverUI", 1f);
+            }
         }
+    }
+
+    private void ShowGameOverUI()
+    {
+        gameOver.SetActive(true);
+        Invoke("ShowButtons", 1f);
+    }
+
+    private void ShowButtons()
+    {
+        gameOverClip.Play();
+        gameOverButtonsAni.SetTrigger("Ani");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
