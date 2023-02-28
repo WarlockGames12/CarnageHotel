@@ -12,6 +12,7 @@
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.ProBuilder.Poly2Tri.dll"
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.Mathematics.dll"
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.ProBuilder.KdTree.dll"
+-a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.Postprocessing.Runtime.dll"
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.ProBuilder.Stl.dll"
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll"
 -a="C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath\Library\PlayerScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll"

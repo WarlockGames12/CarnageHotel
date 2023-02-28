@@ -1,8 +1,5 @@
-using System;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +8,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Movement: ")]
     [SerializeField] [Range(0, 100)] private float playerSpeed;
     [SerializeField] [Range(-10, 10)] private float playerGravity;
+
+    //FOV Settings:
+    [SerializeField] private AudioSource zoominOut;
+    private float zoomSpeed = 10f;
+    private float minZoom = 10f;
+    private float maxZoom = 30f;
+    private float zoomedInFOV = 20f;
+    private float zoomedOutFOV = 60f;
+    private float originalFOV;
 
     [Header("Sprint Settings: ")]
     [SerializeField] [Range(0,15)] private float sprintDuration;
@@ -26,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Press E: ")]
     [SerializeField] private GameObject pressE;
+
+    public static bool pressEs;
     [SerializeField] private bool isBeginning;
     
     
@@ -56,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _playerVelocity;
     
     public bool jumpScare = false;
+    public bool isZoomedIn = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -66,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         _animateCurve.AddKey(0.3f, 0f);
         
         pauseMenu.SetActive(false);
+        originalFOV = Camera.main.fieldOfView;
         
         playOnly.enabled = false;
         _playerController = GetComponent<CharacterController>();
@@ -81,10 +91,56 @@ public class PlayerMovement : MonoBehaviour
             ToggleLight();
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && TurnOn.isInRange)
+            pressEs = true;
+        else if (Input.GetKeyDown(KeyCode.E) && TurnOn.isInRange && pressEs)
+            pressEs = false;
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!isZoomedIn && !zoominOut.isPlaying)
+            {
+                zoominOut.pitch = Random.Range(0.7f, 1.2f);
+                zoominOut.Play();
+                ZoomIn();
+            }
+            else if (isZoomedIn && !zoominOut.isPlaying)
+            {
+                zoominOut.pitch = Random.Range(0.7f, 1.2f);
+                zoominOut.Play();
+                ZoomOut();
+            }
+        }
         SprintFeature();
         PauseGame();
     }
 
+    private void ZoomIn()
+    {
+        isZoomedIn = true;
+        StartCoroutine(ZoomTo(zoomedInFOV, 1f));
+    }
+
+    private void ZoomOut()
+    {
+        isZoomedIn = false;
+        StartCoroutine(ZoomTo(zoomedOutFOV, 1f));
+    }
+
+    private IEnumerator ZoomTo(float targetZoom, float duration)
+    {
+        var oldZoom = Camera.main.fieldOfView;
+        var t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            var newZoom = Mathf.Lerp(oldZoom, targetZoom, t / duration);
+            Camera.main.fieldOfView = newZoom;
+            yield return null;
+        }
+        Camera.main.fieldOfView = targetZoom;
+    }
+    
     private void SprintFeature()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && _timeLeft <= 0)
@@ -113,6 +169,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
         {
             pauseMenu.SetActive(true);
+            isPaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             Time.timeScale = 0f;
@@ -120,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
         {
             pauseMenu.SetActive(false);
+            isPaused = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             Time.timeScale = 1f;
