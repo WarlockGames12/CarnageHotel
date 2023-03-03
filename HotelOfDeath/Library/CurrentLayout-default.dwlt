@@ -718,22 +718,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Models/Trashbag/textures/textures
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Models/Trashbag/textures/textures
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 6}
-    m_SelectedIDs: 24610000
-    m_LastClickedID: 24868
-    m_ExpandedIDs: 00000000ec600000ee60000000ca9a3b
+    scrollPos: {x: 0, y: 134}
+    m_SelectedIDs: 52830000
+    m_LastClickedID: 33618
+    m_ExpandedIDs: 00000000ec600000ee600000be6100009462000096620000548300005683000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -788,7 +788,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000125f0000c01e0000ba1e0000cc1e0000ba620000628dffff
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -882,9 +882,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 24fbffff4a57000054590000
+      m_SelectedIDs: f8a3ffff
+      m_LastClickedID: -23560
+      m_ExpandedIDs: c4b2ffff3eb5ffff24fbffff6c5000004a520000e05300003e540000aa560000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -944,9 +944,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 12.682353, y: 3.6147897, z: 34.078354}
+    m_Target: {x: -0.40418646, y: 1.1173233, z: -5.619711}
     speed: 2
-    m_Value: {x: 12.682353, y: 3.6147897, z: 34.078354}
+    m_Value: {x: -0.40418646, y: 1.1173233, z: -5.619711}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -993,9 +993,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.028864948, y: 0.960635, z: -0.11450594, w: -0.25217465}
+    m_Target: {x: 0.17966932, y: 0.6665536, z: -0.16851649, w: 0.7038781}
     speed: 2
-    m_Value: {x: -0.028859805, y: 0.9604638, z: -0.11448554, w: -0.2521297}
+    m_Value: {x: 0.17963187, y: 0.6664147, z: -0.16848136, w: 0.70373136}
   m_Size:
     m_Target: 1.3754576
     speed: 2
