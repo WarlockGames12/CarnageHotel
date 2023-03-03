@@ -54,6 +54,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\UI\VolumeScripts.cs" />
      <Compile Include="Assets\Scripts\UI\DialogueData.cs" />
+     <Compile Include="Assets\Scripts\UI\FullScreen.cs" />
      <Compile Include="Assets\Scripts\Player\BoppingScript.cs" />
      <Compile Include="Assets\Scripts\Enemy\ChaseState.cs" />
      <Compile Include="Assets\Scripts\UI\TimerScript.cs" />
@@ -82,7 +83,6 @@
      <Compile Include="Assets\Scripts\Enemy\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\Environment\TurnOn.cs" />
      <Compile Include="Assets\Scripts\Enemy\LookAtPlayer.cs" />
-     <Compile Include="Assets\Scripts\UI\FullScreen.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.20f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
