@@ -95,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
             pressEs = true;
         else if (Input.GetKeyDown(KeyCode.E) && TurnOn.isInRange && pressEs)
             pressEs = false;
+        
+        if (Input.GetKeyDown(KeyCode.E) && PickupKey.willGetKey)
+            PickupKey.hasKey = true;
 
         if (Input.GetMouseButtonDown(1))
         {

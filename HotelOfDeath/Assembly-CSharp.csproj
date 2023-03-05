@@ -83,6 +83,7 @@
      <Compile Include="Assets\Scripts\Enemy\RandomMovement.cs" />
      <Compile Include="Assets\Scripts\Environment\TurnOn.cs" />
      <Compile Include="Assets\Scripts\Enemy\LookAtPlayer.cs" />
+     <Compile Include="Assets\PickupKey.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.20f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

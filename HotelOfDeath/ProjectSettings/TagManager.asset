@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Lamp
   - TurnOn
+  - Key
   layers:
   - Default
   - TransparentFX

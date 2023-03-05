@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 678, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 91
+  controlID: 93
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 18
+  controlID: 44
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 19
+  controlID: 124
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -679,7 +679,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 37234
+  m_LastSelectedObjectID: -1250
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -718,22 +718,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Models/Trashbag/textures/textures
+    - Assets/Models/Door
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Models/Trashbag/textures/textures
+  - Assets/Models/Door
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\fpwee\OneDrive\Documenten\Awesome\Carnage\CarnageHotel\HotelOfDeath
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 134}
-    m_SelectedIDs: 52830000
-    m_LastClickedID: 33618
-    m_ExpandedIDs: 00000000ec600000ee600000be6100009462000096620000548300005683000000ca9a3b
+    scrollPos: {x: 0, y: 74}
+    m_SelectedIDs: e6610000
+    m_LastClickedID: 25062
+    m_ExpandedIDs: 00000000586100005a610000d261000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -761,7 +761,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ec600000ee600000
+    m_ExpandedIDs: 00000000586100005a610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -842,8 +842,10 @@ MonoBehaviour:
     width: 453
     height: 918
   m_ViewDataDictionary: {fileID: 0}
-  m_ObjectsLockedBeforeSerialization: []
-  m_InstanceIDsLockedBeforeSerialization: 
+  m_ObjectsLockedBeforeSerialization:
+  - {fileID: 0}
+  - {fileID: 0}
+  m_InstanceIDsLockedBeforeSerialization: 1efbffff
   m_PreviewResizer:
     m_CachedPref: -160
     m_ControlHash: -371814159
@@ -852,7 +854,7 @@ MonoBehaviour:
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_LockTracker:
-    m_IsLocked: 0
+    m_IsLocked: 1
   m_PreviewWindow: {fileID: 0}
 --- !u!114 &17
 MonoBehaviour:
@@ -882,9 +884,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f8a3ffff
-      m_LastClickedID: -23560
-      m_ExpandedIDs: c4b2ffff3eb5ffff24fbffff6c5000004a520000e05300003e540000aa560000
+      m_SelectedIDs: d0adffff86abffff
+      m_LastClickedID: -21626
+      m_ExpandedIDs: 12b0ffff22fbffff24fbfffff24f000058520000f853000056540000da550000f056000042570000465a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -900,7 +902,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 11}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -944,9 +946,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.40418646, y: 1.1173233, z: -5.619711}
+    m_Target: {x: 1.4395816, y: 3.1169827, z: 29.20722}
     speed: 2
-    m_Value: {x: -0.40418646, y: 1.1173233, z: -5.619711}
+    m_Value: {x: 1.4395816, y: 3.1169827, z: 29.20722}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -993,13 +995,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.17966932, y: 0.6665536, z: -0.16851649, w: 0.7038781}
+    m_Target: {x: -0.2529263, y: -0.3244241, z: 0.088886596, w: -0.9074018}
     speed: 2
-    m_Value: {x: 0.17963187, y: 0.6664147, z: -0.16848136, w: 0.70373136}
+    m_Value: {x: -0.2528629, y: -0.3243428, z: 0.08886432, w: -0.90717435}
   m_Size:
-    m_Target: 1.3754576
+    m_Target: 3.1754575
     speed: 2
-    m_Value: 1.3754576
+    m_Value: 3.1754575
   m_Ortho:
     m_Target: 0
     speed: 2
